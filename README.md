@@ -14,8 +14,11 @@ STATICFILES_DIRS = ''
 ```
 
 Unit-тесты
-```python
+```
 python manage.py test questions
 ```
 
 Запуск на сервере
+```
+docker-compose up -d
+```

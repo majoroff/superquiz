@@ -23,6 +23,7 @@ class QuestionAdmin(admin.ModelAdmin):
 
 class ResultAdmin(admin.ModelAdmin):
     list_display = ('test', 'user', 'right', 'wrong')
+    list_filter = ('user',)
 
 
 admin.site.register(Test, TestAdmin)
