@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+
+{%block content%}
+
+{% if messages %}
+	{% for message in messages %}
+	<div class="{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
+<ul>
+	<form action="" method="POST">{%csrf_token%}
+		{% for q in questions %}
+			<li>
+				{{q.text}}
+				<ul>
+					{% for a in q.answer_set.all %}
+						<li><input type="checkbox" name="{{q.id}}" value="{{a.id}}">{{a.text}}</li>
+					{% endfor %}
+				</ul>
+			</li>	
+				
+		{% endfor %}
+		<input type="hidden" name="test_id" value="{{test_id}}">
+		<input type="submit" name="" value="Отправить результаты">
+	</form>
+</ul>
+{%endblock%}

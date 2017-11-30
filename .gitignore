@@ -1,0 +1,4 @@
+*.pyc
+src/quizz/settings/local.py
+src/assets
+__pycache__

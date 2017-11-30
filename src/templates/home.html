@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{%block content%}
+
+	<h3>Available tests</h3>
+	<ul>
+		{% for test in tests %}
+			<li><a href="{{test.get_absolute_url}}">{{test.title}}</a></li>
+		{% endfor %}
+	</ul>
+
+
+{%endblock%}
