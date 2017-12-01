@@ -1,6 +1,7 @@
 # coding: utf-8
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
@@ -21,6 +22,7 @@ def home_view(request):
     return render(request, 'home.html', context)
 
 
+@login_required
 def quiz_view(request, test_id=0):
 
     if request.method == 'POST':

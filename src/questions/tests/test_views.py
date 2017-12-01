@@ -36,13 +36,17 @@ class AuthTest(TestCase):
 
     def test_login_renders_form(self):
         response = self.client.get('/login/')
-        self.assertTemplateUsed(response, 'registration/login.html')        
-
+        self.assertTemplateUsed(response, 'registration/login.html')
 
     def test_POST_login(self):
         User.objects.create_user(username=self.username, password=self.password)        
         response = self.client.post('/login/', {'username': self.username, 'password': self.password}, follow=True)
         self.assertTrue(response.context['user'].is_authenticated())
+
+    def test_login_required_for_quiz(self):
+        quiz_url = reverse('quiz', kwargs={'test_id': 0})
+        response = self.client.get(quiz_url)
+        self.assertRedirects(response, '/login/?next=%s' % quiz_url)
 
 
 class QuizTest(TestCase):
@@ -91,6 +95,4 @@ class QuizTest(TestCase):
         # тест пройден, значит больше недоступен на главной
         response = self.client.get('/')
         self.assertNotContains(response, quiz.title)
-
-
 
